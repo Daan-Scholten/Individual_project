@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="GVL" Id="{72c71f0c-9377-45ca-8642-7058ddfae0ab}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	CarDetection : BOOL := FALSE;
+    CarLightGreen : BOOL := FALSE;
+	TimerCarLightGreen : TIME := T#0S;
+	CarLightYellow : BOOL:= FALSE;
+	CarLightRed: BOOL := FALSE;
+	PedestrianLight : BOOL := FALSE;
+	
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
