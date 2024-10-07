@@ -3,15 +3,43 @@
   <POU Name="MAIN" Id="{f24a42c3-b030-4992-be5e-c24c89fa021d}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	
+	StartTrafficLightTimer: BOOL := FALSE;
+	DelayPedestrianLight: BOOL;
+	TimerTrafficLight: TON;
+
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[ 
+      <ST><![CDATA[IF GVL.ButtonPedestrian AND NOT StartTrafficLightTimer THEN        // wait time for pedestrian
+	TimerTrafficLight( IN := GVL.ButtonPedestrian, PT := T#10S );
+	DelayPedestrianLight := TimerTrafficLight.Q;
+	StartTrafficLightTimer := TRUE;
+	
+ELSIF StartTrafficLightTimer THEN            // working of the traffic light
+	IF GVL.CarLightGreen THEN
+		GVL.CarLightGreen := FALSE;
+		GVL.CarLightYellow := TRUE;
+	ELSIF GVL.CarLightYellow THEN
+		GVL.CarLightYellow := FALSE;
+		GVL.CarLightRed:= TRUE;	
+	ELSIF GVL.CarLightRed AND GVL.PedestrianLightRed THEN
+		GVL.CarLightRed := FALSE;
+		GVL.CarLightGreen := TRUE;		
+	END_IF
+
+StartTrafficLightTimer := FALSE;
+	
+END_IF
 	
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
+      <LineId Id="45" Count="1" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="47" Count="8" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="70" Count="1" />
+      <LineId Id="56" Count="3" />
       <LineId Id="2" Count="0" />
       <LineId Id="27" Count="1" />
     </LineIds>

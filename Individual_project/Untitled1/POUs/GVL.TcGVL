@@ -8,7 +8,7 @@ VAR_GLOBAL
 CarLightRed : BOOL := FALSE;
 CarLightYellow : BOOL := FALSE;
 CarLightGreen : BOOL := TRUE;
- 
+PedestrianLightRed : Bool := False; 
 	
 END_VAR]]></Declaration>
   </GVL>
