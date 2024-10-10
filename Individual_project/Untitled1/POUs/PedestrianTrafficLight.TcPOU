@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="PedestrianTrafficLight" Id="{fb27f1c4-8fe7-4552-9e6a-3e079d037577}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PedestrianTrafficLight
+VAR
+	GreenTimerOn : BOOL := FALSE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE GVL.StatusPedestrianLight OF
+
+//Red Light
+   0: GVL.PedestrianLightRed := TRUE;
+      GVL.PedestrianLightGreen := FALSE;
+	  
+	  IF GVL.ButtonPedestrian AND (GVL.StatusCarLight := 2) THEN
+		 GVL.StatusPedestrianLight := 1;
+	  END_IF
+//Green light
+   1:GVL.PedestrianLightRed := FALSE;
+     GVL.PedestrianLightGreen := TRUE;
+	 
+	 IF NOT GreenTimerOn THEN
+		GVL.TONPedestrianGreen(IN := TRUE , PT := T#10S);
+		GreenTimerOn := TRUE;		
+	 END_IF
+	 
+	 IF GVL.TONPedestrianGreen.Q THEN
+		GVL.StatusPedestrianLight := 0;
+		GVL.ButtonPedestrian := FALSE;
+		GreenTimerOn := FALSE;
+	 END_IF
+	 
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="PedestrianTrafficLight">
+      <LineId Id="7" Count="23" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

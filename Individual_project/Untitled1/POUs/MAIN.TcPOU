@@ -3,84 +3,16 @@
   <POU Name="MAIN" Id="{f24a42c3-b030-4992-be5e-c24c89fa021d}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	GreenToYellowTimerOn : BOOL := FALSE;
-    YellowToRedTimerOn : BOOL := FALSE;
-    RedToGreenTimerOn : BOOL := FALSE;
-	
+
 
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[CASE GVL.StatusCarLight OF
-	
-//Green light
-    0: GVL.CarLightGreen := TRUE;
-	   GVL.CarLightYellow := FALSE;
-	   GVL.CarLightRed := FALSE;
-       
-	   IF NOT GreenToYellowTimerOn THEN         //Start timer to go to yellow light
-		   GVL.TONCarGreenToYellow ( IN := TRUE , PT := T#10S);
-           GreenToYellowTimerOn := TRUE; 
-	   END_IF
-	
-	   IF GVL.TONCarGreenToYellow.Q THEN        // If timer reaches 10s traffic light turns yellow
-		   GVL.StatusCarLight := 1;
-		   GreenToYellowTimerOn := FALSE;
-	   END_IF
-	   
-//Yellow Light
-	 1:GVL.CarLightGreen := FALSE;
-	   GVL.CarLightYellow := TRUE;
-	   GVL.CarLightRed := FALSE;
-       
-	   IF NOT YellowToRedTimerOn THEN         //Start timer to go to red light
-		   GVL.TONCarYellowToRed ( IN := TRUE , PT := T#3S);
-           YellowToRedTimerOn := TRUE; 
-	   END_IF
-	
-	   IF GVL.TONCarYellowToRed.Q THEN        // If timer reaches 3s traffic light turns red
-		   GVL.StatusCarLight := 2;
-		   YellowToRedTimerOn := FALSE;
-	   END_IF
-
-//Red Light
-	 2:GVL.CarLightGreen := FALSE;
-	   GVL.CarLightYellow := FALSE;
-	   GVL.CarLightRed := TRUE;
-       
-	   IF NOT RedToGreenTimerOn THEN         //Start timer to go to green light
-		   GVL.TONCarRedToGreen ( IN := TRUE , PT := T#10S);
-           RedToGreenTimerOn := TRUE; 
-	   END_IF
-	
-	   IF GVL.TONCarRedToGreen.Q THEN        // If timer reaches 10s traffic light turns green
-		   GVL.StatusCarLight := 0;
-		   RedToGreenTimerOn := FALSE;
-	   END_IF
-END_CASE
-	
-]]></ST>
+      <ST><![CDATA[CarTrafficLight();
+PedestrianTrafficLight();]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="2" Count="0" />
-      <LineId Id="81" Count="1" />
-      <LineId Id="79" Count="0" />
-      <LineId Id="83" Count="1" />
-      <LineId Id="86" Count="1" />
-      <LineId Id="91" Count="0" />
-      <LineId Id="93" Count="0" />
-      <LineId Id="92" Count="0" />
-      <LineId Id="85" Count="0" />
-      <LineId Id="94" Count="1" />
-      <LineId Id="97" Count="0" />
-      <LineId Id="96" Count="0" />
-      <LineId Id="112" Count="0" />
-      <LineId Id="99" Count="12" />
-      <LineId Id="98" Count="0" />
-      <LineId Id="114" Count="13" />
-      <LineId Id="113" Count="0" />
-      <LineId Id="80" Count="0" />
-      <LineId Id="27" Count="1" />
+      <LineId Id="175" Count="1" />
     </LineIds>
   </POU>
 </TcPlcObject>

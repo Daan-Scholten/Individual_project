@@ -3,42 +3,63 @@
   <POU Name="CarTrafficLight" Id="{937bb74f-8fa3-4ea3-85e7-c63a585c47b5}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM CarTrafficLight
 VAR
-	StartTrafficLightTimer: BOOL := FALSE;
-	DelayPedestrianLight: TIME;
-	TimerTrafficLight: TON;
+
+	GreenToYellowTimerOn : BOOL := FALSE;
+    YellowToRedTimerOn : BOOL := FALSE;
+    RedToGreenTimerOn : BOOL := FALSE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF GVL.ButtonPedestrian AND NOT StartTrafficLightTimer THEN
-	TimerTrafficLight( IN := GVL.ButtonPedestrian, PT := T#10S );
-	StartTrafficLightTimer := TRUE;
+      <ST><![CDATA[CASE GVL.StatusCarLight OF
 	
-ELSIF StartTrafficLightTimer AND TimerTrafficLight THEN
-	IF GVL.CarLightGreen THEN
-		GVL.CarLightGreen := FALSE;
-		GVL.CarLightYellow := TRUE;
-	ELSIF GVL.CarLightYellow THEN
-		GVL.CarLightYellow := FALSE;
-		GVL.CarLightRed:= TRUE;	
-	END_IF
+//Green light
+    0: GVL.CarLightGreen := TRUE;
+	   GVL.CarLightYellow := FALSE;
+	   GVL.CarLightRed := FALSE;
+       
+	   IF NOT GreenToYellowTimerOn THEN         //Start timer to go to yellow light
+		   GVL.TONCarGreenToYellow ( IN := TRUE , PT := T#10S);
+           GreenToYellowTimerOn := TRUE; 
+	   END_IF
+	
+	   IF GVL.TONCarGreenToYellow.Q THEN        // If timer reaches 10s traffic light turns yellow
+		   GVL.StatusCarLight := 1;
+		   GreenToYellowTimerOn := FALSE;
+	   END_IF
+	   
+//Yellow Light
+	 1:GVL.CarLightGreen := FALSE;
+	   GVL.CarLightYellow := TRUE;
+	   GVL.CarLightRed := FALSE;
+       
+	   IF NOT YellowToRedTimerOn THEN         //Start timer to go to red light
+		   GVL.TONCarYellowToRed ( IN := TRUE , PT := T#3S);
+           YellowToRedTimerOn := TRUE; 
+	   END_IF
+	
+	   IF GVL.TONCarYellowToRed.Q THEN        // If timer reaches 3s traffic light turns red
+		   GVL.StatusCarLight := 2;
+		   YellowToRedTimerOn := FALSE;
+	   END_IF
 
-StartTrafficLightTimer := FALSE;
-GVL.ButtonPedestrian := FALSE;	
-END_IF]]></ST>
+//Red Light
+	 2:GVL.CarLightGreen := FALSE;
+	   GVL.CarLightYellow := FALSE;
+	   GVL.CarLightRed := TRUE;
+       
+	   IF NOT RedToGreenTimerOn THEN         //Start timer to go to green light
+		   GVL.TONCarRedToGreen ( IN := TRUE , PT := T#10S);
+           RedToGreenTimerOn := TRUE; 
+	   END_IF
+	
+	   IF GVL.TONCarRedToGreen.Q THEN        // If timer reaches 10s traffic light turns green
+		   GVL.StatusCarLight := 0;
+		   RedToGreenTimerOn := FALSE;
+	   END_IF
+END_CASE]]></ST>
     </Implementation>
     <LineIds Name="CarTrafficLight">
-      <LineId Id="5" Count="1" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="26" Count="2" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="21" Count="0" />
-      <LineId Id="31" Count="0" />
+      <LineId Id="38" Count="45" />
       <LineId Id="7" Count="0" />
     </LineIds>
   </POU>
