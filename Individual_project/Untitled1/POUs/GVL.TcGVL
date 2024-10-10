@@ -3,12 +3,30 @@
   <GVL Name="GVL" Id="{72c71f0c-9377-45ca-8642-7058ddfae0ab}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	ButtonPedestrian : BOOL := FALSE; // Detects if there is a person to cross the road
-
+	
+// Car light status
 CarLightRed : BOOL := FALSE;
 CarLightYellow : BOOL := FALSE;
 CarLightGreen : BOOL := TRUE;
-PedestrianLightRed : Bool := False; 
+
+// Timers for transitions
+TONCarGreenToYellow : TON;
+TONCarYellowToRed : TON;
+TONCarRedToGreen : TON;
+TONPedestrianGreen : TON;
+
+// Pedestrian light status
+PedestrianLightRed : BOOL := TRUE;
+PedestrianLightGreen : BOOL := FALSE;
+
+// Detects if there is a person to cross the road
+ButtonPedestrian : BOOL := FALSE;
+
+// Status traffic lights
+StatusCarLight : INT := 0;
+StatusPedestrianLight : INT := 0;
+
+
 	
 END_VAR]]></Declaration>
   </GVL>

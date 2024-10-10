@@ -11,13 +11,33 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"370"</v>
+              <v n="TextDefault">"Pedestrian Light"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"261"</v>
+              <v n="TextDefault">"Pedestrian Sensor"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"570"</v>
               <v n="TextDefault">"Pedestrian Switch"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"378"</v>
+              <v n="TextDefault">"Traffic"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"988"</v>
               <v n="TextDefault">"Traffic light"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"852"</v>
+              <v n="TextDefault">"Traffic Sensor"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
           </l>
