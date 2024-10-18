@@ -21,6 +21,7 @@ PedestrianLightGreen : BOOL := FALSE;
 
 // Detects if there is a person to cross the road
 ButtonPedestrian : BOOL := FALSE;
+CarSensor : BOOL := FALSE;
 
 // Status traffic lights
 StatusCarLight : INT := 0;
