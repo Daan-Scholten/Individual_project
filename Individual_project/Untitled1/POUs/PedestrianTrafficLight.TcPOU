@@ -13,7 +13,7 @@ END_VAR
    0: GVL.PedestrianLightRed := TRUE;
       GVL.PedestrianLightGreen := FALSE;
 	  
-	  IF GVL.ButtonPedestrian AND (GVL.StatusCarLight := 2) THEN
+	  IF GVL.ButtonPedestrian AND GVL.StatusCarLight = 2 THEN
 		 GVL.StatusPedestrianLight := 1;
 	  END_IF
 //Green light
@@ -34,7 +34,9 @@ END_VAR
 END_CASE]]></ST>
     </Implementation>
     <LineIds Name="PedestrianTrafficLight">
-      <LineId Id="7" Count="23" />
+      <LineId Id="7" Count="5" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="15" Count="15" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
