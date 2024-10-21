@@ -10,32 +10,48 @@ END_VAR
       <ST><![CDATA[CASE GVL.StatusPedestrianLight OF
 
 //Red Light
-   0: GVL.PedestrianLightRed := TRUE;
+   0:
+      GVL.PedestrianLightRed := TRUE;
       GVL.PedestrianLightGreen := FALSE;
 	  
 	  IF GVL.StatusCarLight = 2 THEN
 		 GVL.StatusPedestrianLight := 1;
 	  END_IF
+	  
 //Green light
-   1:GVL.PedestrianLightRed := FALSE;
+   1:IF GVL.CarSensor THEN
+	   GVL.StatusPedestrianLight := 2;
+     ELSE
+     GVL.PedestrianLightRed := FALSE;
      GVL.PedestrianLightGreen := TRUE;
-	 
-     GVL.TONPedestrianGreen(IN := GVL.CarSensor , PT := T#10S);
-		
-	 
-	 IF GVL.TONPedestrianGreen.Q THEN
-		GVL.StatusPedestrianLight := 0;
 	 END_IF
 	 
+// Waiting time for car	 
+2:  GVL.TONPedestrianGreen(IN := TRUE , PT := T#10S);
+		
+	 IF GVL.TONPedestrianGreen.Q THEN
+		GVL.StatusPedestrianLight := 0;
+		GVL.TONPedestrianGreen (IN := FALSE);
+	 END_IF
 END_CASE]]></ST>
     </Implementation>
     <LineIds Name="PedestrianTrafficLight">
-      <LineId Id="7" Count="5" />
+      <LineId Id="7" Count="3" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="11" Count="1" />
       <LineId Id="35" Count="1" />
-      <LineId Id="15" Count="4" />
-      <LineId Id="21" Count="1" />
-      <LineId Id="24" Count="2" />
-      <LineId Id="29" Count="1" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="16" Count="1" />
+      <LineId Id="49" Count="1" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="53" Count="1" />
+      <LineId Id="56" Count="2" />
+      <LineId Id="52" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

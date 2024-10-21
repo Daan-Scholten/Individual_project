@@ -27,6 +27,8 @@ CarSensor : BOOL := FALSE;
 StatusCarLight : INT := 0;
 StatusPedestrianLight : INT := 0;
 
+//Timer sensoren
+TOFButtonPedestrian : TOF ;
 
 	
 END_VAR]]></Declaration>
