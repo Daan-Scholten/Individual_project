@@ -28,11 +28,24 @@ END_VAR
 	 
 // Waiting time for car	 
 2:  GVL.TONPedestrianGreen(IN := TRUE , PT := T#10S);
-		
-	 IF GVL.TONPedestrianGreen.Q THEN
-		GVL.StatusPedestrianLight := 0;
-		GVL.TONPedestrianGreen (IN := FALSE);
-	 END_IF
+	
+    IF GVL.TONPedestrianGreen.ET >= T#5S THEN
+       GVL.TONBlinkerTimer (IN := TRUE , PT := T#500MS );
+       IF GVL.TONBlinkerTimer.Q THEN
+          GVL.PedestrianLightGreen := NOT GVL.PedestrianLightGreen;
+		  GVL.TONBlinkerTimer (IN := FALSE);
+		  GVL.TONBlinkerTimer (IN := TRUE);
+	   END_IF
+	ELSE
+		GVL.PedestrianLightGreen := TRUE;
+    END_IF
+	
+    IF GVL.TONPedestrianGreen.Q THEN
+	   GVL.StatusPedestrianLight := 0;
+       GVL.TONPedestrianGreen (IN := FALSE);
+	   GVL.TONBlinkerTimer (IN := FALSE);
+	   GVL.PedestrianLightGreen := FALSE;
+	END_IF
 END_CASE]]></ST>
     </Implementation>
     <LineIds Name="PedestrianTrafficLight">
@@ -50,7 +63,14 @@ END_CASE]]></ST>
       <LineId Id="59" Count="0" />
       <LineId Id="51" Count="0" />
       <LineId Id="53" Count="1" />
+      <LineId Id="64" Count="3" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="83" Count="1" />
+      <LineId Id="71" Count="1" />
       <LineId Id="56" Count="2" />
+      <LineId Id="73" Count="1" />
       <LineId Id="52" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
