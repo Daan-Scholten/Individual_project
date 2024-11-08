@@ -1,0 +1,28 @@
+@startuml
+[*] --> Red
+
+state Red {
+  Red : Status = 0
+  Red : Pedestrian Light = red
+  
+  
+}
+Red --> Green : GVL.StatusCarLight = 2
+
+state Green {
+  Green : Status = 1
+  Green : Pedestrian Light = green
+
+  state Green_Flashing {
+  Green_Flashing : Status = 2
+  Green_Flashing : Timer = 10s
+  Green_Flashing : Light Flashes after 5s
+}
+
+Green_Flashing --> Red : Timer finished
+}
+
+Green --> Green_Flashing : GVL.CarSensor
+
+
+@enduml
