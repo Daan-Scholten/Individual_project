@@ -1,0 +1,25 @@
+@startuml
+[*] --> Green
+
+state Green {
+  Green : Status = 0
+  Green : Car light = green
+ 
+}
+Green --> Yellow : GVL.ButtonPedestrian
+
+
+state Yellow {
+  Yellow : Status = 1
+  Yellow : Car Light = Yellow
+  Yellow : Timer = 3s
+}
+Yellow --> Red : Timer finished
+
+state Red {
+  Red : Status = 2
+  Red : Car Light = red
+}
+Red --> Green : GVL.CarSensor
+
+@enduml
