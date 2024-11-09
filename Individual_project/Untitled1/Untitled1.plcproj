@@ -26,6 +26,12 @@
     <Compile Include="POUs\CarTrafficLight.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Function_SettingCarLight.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Function_SettingPedestrianLight.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\GVL.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
@@ -39,6 +45,12 @@
     <Compile Include="POUs\Visualization_Trafficlight_system.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="Task_1.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Task_2.TcTTO">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Visualization Manager.TcVMO">
       <SubType>Code</SubType>

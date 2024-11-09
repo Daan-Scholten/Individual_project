@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Task Name="Task_2" Id="{2373c1a9-1106-4b4c-beee-ed92170d38c2}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>10000</CycleTime>
+    <Priority>2</Priority>
+    <PouCall>
+      <Name>PedestrianTrafficLight</Name>
+    </PouCall>
+    <TaskFBGuid>{b6a8a512-baf4-4387-ae6b-51225e9c693b}</TaskFBGuid>
+    <Fb_init>{9bd60da6-3dec-4f33-9485-0a9994af1b17}</Fb_init>
+    <Fb_exit>{6895483d-3fe6-4af0-9b81-446cd322d2a9}</Fb_exit>
+    <CycleUpdate>{ee0df349-4541-4f9c-9f0f-40dcc2138fbc}</CycleUpdate>
+    <PostCycleUpdate>{bddef9c8-1c33-4d00-a069-de74f9d99854}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

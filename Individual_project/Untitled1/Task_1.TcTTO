@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Task Name="Task_1" Id="{46243940-8d93-45b9-adba-d3c4fdacb639}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>10000</CycleTime>
+    <Priority>1</Priority>
+    <PouCall>
+      <Name>CarTrafficLight</Name>
+    </PouCall>
+    <TaskFBGuid>{532e1858-1755-4c04-ba43-34d368dc7f33}</TaskFBGuid>
+    <Fb_init>{dc02de24-b6de-4843-bc4c-c6b10b1ca596}</Fb_init>
+    <Fb_exit>{062db647-c48e-42f2-8c6c-2bcc5156c974}</Fb_exit>
+    <CycleUpdate>{5bd5f58a-1c54-41fe-ae21-e1fb93c31dc8}</CycleUpdate>
+    <PostCycleUpdate>{8f9d2989-922b-48c8-86c8-74b2f327d4f2}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>
