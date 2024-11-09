@@ -1,0 +1,35 @@
+@startuml
+actor Task as User
+participant "GVL.StatusCarLight" as StateMachine
+participant Function_SettingCarLight
+
+== Green Light State ==
+User -> StateMachine: Execute Task
+StateMachine -> Function_SettingCarLight: Function_SettingCarLight(2) // Set to Green
+activate Function_SettingCarLight
+Function_SettingCarLight --> StateMachine: TRUE
+deactivate Function_SettingCarLight
+
+opt Pedestrian Button Pressed
+    StateMachine -> StateMachine: GVL.StatusCarLight := 3 // Transition to Waiting (Green to Yellow)
+end
+
+== Yellow Light State ==
+StateMachine -> Function_SettingCarLight: Function_SettingCarLight(1) // Set to Yellow
+activate Function_SettingCarLight
+Function_SettingCarLight --> StateMachine: TRUE
+deactivate Function_SettingCarLight
+
+StateMachine -> StateMachine: GVL.StatusCarLight := 2 // Transition to Red
+
+== Red Light State ==
+StateMachine -> Function_SettingCarLight: Function_SettingCarLight(0) // Set to Red
+activate Function_SettingCarLight
+Function_SettingCarLight --> StateMachine: TRUE
+deactivate Function_SettingCarLight
+
+opt Car Detected
+    StateMachine -> StateMachine: GVL.StatusCarLight := 4 // Transition to Waiting (Red to Green)
+end
+
+@enduml

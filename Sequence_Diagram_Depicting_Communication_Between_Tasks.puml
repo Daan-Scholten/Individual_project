@@ -1,0 +1,36 @@
+@startuml
+actor PedestrianButton
+participant CarSensor
+participant StatusCarLight as CarLight
+participant StatusPedestrianLight as PedestrianLight
+
+== Initial State ==
+
+PedestrianButton -> CarLight: Press Button (GVL.ButtonPedestrian)
+activate CarLight
+
+CarLight -> CarLight: Status = 0 (Green Light)
+CarLight -> PedestrianLight: Check StatusCarLight = 2?
+
+== Car Light Sequence ==
+
+CarLight -> CarLight: Set Status = 3 (Preparing to go to Yellow)
+CarLight -> CarLight: Status = 1 (Yellow Light)
+CarLight -> CarLight: Status = 2 (Red Light)
+
+== Pedestrian Light Sequence ==
+
+PedestrianLight -> PedestrianLight: Status = 0 (Red Light)
+PedestrianLight -> CarLight: Check if StatusCarLight = 2
+CarLight --> PedestrianLight: StatusCarLight = 2
+
+PedestrianLight -> PedestrianLight: Status = 1 (Green Light)
+PedestrianLight -> PedestrianLight: Blinking Green (after 5 seconds)
+PedestrianLight -> PedestrianLight: Status = 0 (Red Light)
+
+== Car Light Returns to Green ==
+
+CarSensor -> CarLight: Detect Vehicle (GVL.CarSensor)
+CarLight -> CarLight: Set Status = 4 (Preparing to go to Green)
+CarLight -> CarLight: Status = 0 (Green Light)
+@enduml
