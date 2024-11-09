@@ -16,15 +16,11 @@ END_VAR
 0: IF GVL.ButtonPedestrian THEN
 	GVL.StatusCarLight := 3;
    ELSE
-    GVL.CarLightGreen := TRUE;       // Car Traffic Light
-	GVL.CarLightYellow := FALSE;
-	GVL.CarLightRed := FALSE;
+   Function_SettingCarLight(2);
    END_IF
    
 //Yellow Light
-1:  GVL.CarLightGreen := FALSE;            // Car Traffic Light
-	GVL.CarLightYellow := TRUE;
-	GVL.CarLightRed := FALSE;
+1:  Function_SettingCarLight (1);
 	            
 	GVL.TONCarYellowToRed ( IN := TRUE , PT := T#3S);  //Start timer to go to red light
           
@@ -36,11 +32,8 @@ END_VAR
 //Red Light
 2: IF GVL.CarSensor THEN
      GVL.StatusCarLight :=4;
-	 
    ELSE
-     GVL.CarLightGreen := FALSE;              // Car Traffic Light
-	 GVL.CarLightYellow := FALSE;
-	 GVL.CarLightRed := TRUE;
+     Function_SettingCarLight (0);
    END_IF 
 	  
 //Waiting time green to yellow
@@ -62,15 +55,11 @@ END_CASE]]></ST>
     <LineIds Name="CarTrafficLight">
       <LineId Id="38" Count="2" />
       <LineId Id="116" Count="0" />
-      <LineId Id="160" Count="1" />
-      <LineId Id="159" Count="0" />
-      <LineId Id="42" Count="0" />
-      <LineId Id="162" Count="0" />
+      <LineId Id="160" Count="2" />
       <LineId Id="54" Count="0" />
       <LineId Id="176" Count="0" />
       <LineId Id="55" Count="0" />
-      <LineId Id="165" Count="0" />
-      <LineId Id="57" Count="1" />
+      <LineId Id="58" Count="0" />
       <LineId Id="60" Count="1" />
       <LineId Id="64" Count="2" />
       <LineId Id="126" Count="0" />
@@ -78,9 +67,9 @@ END_CASE]]></ST>
       <LineId Id="191" Count="0" />
       <LineId Id="70" Count="0" />
       <LineId Id="192" Count="0" />
-      <LineId Id="180" Count="1" />
-      <LineId Id="178" Count="1" />
-      <LineId Id="72" Count="1" />
+      <LineId Id="180" Count="0" />
+      <LineId Id="178" Count="0" />
+      <LineId Id="73" Count="0" />
       <LineId Id="177" Count="0" />
       <LineId Id="190" Count="0" />
       <LineId Id="150" Count="0" />

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="Function_SettingCarLight" Id="{7834f468-6cf6-42b0-a0ce-ed52745fb4a3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Function_SettingCarLight : BOOL
+VAR_INPUT
+	ColorCarLight : INT; // 0 for Red, 1 for Green
+    
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Set the light state
+CASE ColorCarLight OF
+    0:  // Red
+        GVl.PedestrianLightRed := TRUE;
+        GVL.PedestrianLightGreen := FALSE;
+    
+    1:  // Green
+        GVL.PedestrianLightRed := FALSE;
+        GVL.PedestrianLightGreen := TRUE;
+END_CASE;
+
+Function_SettingPedestrianLight := TRUE;
+]]></ST>
+    </Implementation>
+    <LineIds Name="Function_SettingCarLight">
+      <LineId Id="20" Count="3" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="41" Count="1" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

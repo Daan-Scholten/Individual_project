@@ -11,8 +11,7 @@ END_VAR
 
 //Red Light
    0:
-      GVL.PedestrianLightRed := TRUE;
-      GVL.PedestrianLightGreen := FALSE;
+      Function_SettingPedestrianLight (0);
 	  
 	  IF GVL.StatusCarLight = 2 THEN
 		 GVL.StatusPedestrianLight := 1;
@@ -22,8 +21,7 @@ END_VAR
    1:IF GVL.CarSensor THEN
 	   GVL.StatusPedestrianLight := 2;
      ELSE
-     GVL.PedestrianLightRed := FALSE;
-     GVL.PedestrianLightGreen := TRUE;
+     Function_SettingPedestrianLight (1);
 	 END_IF
 	 
 // Waiting time for car	 
@@ -51,14 +49,13 @@ END_CASE]]></ST>
     <LineIds Name="PedestrianTrafficLight">
       <LineId Id="7" Count="3" />
       <LineId Id="45" Count="0" />
-      <LineId Id="11" Count="1" />
+      <LineId Id="89" Count="0" />
       <LineId Id="35" Count="1" />
       <LineId Id="15" Count="0" />
       <LineId Id="47" Count="0" />
       <LineId Id="16" Count="1" />
       <LineId Id="49" Count="1" />
       <LineId Id="48" Count="0" />
-      <LineId Id="18" Count="0" />
       <LineId Id="30" Count="0" />
       <LineId Id="59" Count="0" />
       <LineId Id="51" Count="0" />

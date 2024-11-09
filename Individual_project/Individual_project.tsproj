@@ -9,16 +9,37 @@
 				<Task Id="4" Priority="1" CycleTime="100000" AmsPort="351" AdtTasks="true">
 					<Name>Task 1</Name>
 				</Task>
+				<Task Id="5" Priority="2" CycleTime="100000" AmsPort="352" AdtTasks="true">
+					<Name>Task 2</Name>
+				</Task>
 			</Tasks>
 		</System>
 		<Plc>
 			<Project GUID="{59B104D8-CBA4-408F-ACA2-88C4DC307414}" Name="Untitled1" PrjFilePath="Untitled1\Untitled1.plcproj" TmcFilePath="Untitled1\Untitled1.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Untitled1\Untitled1.tmc" TmcHash="{7885F853-B4A8-28B0-1919-E35AD5185251}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Untitled1\Untitled1.tmc" TmcHash="{0E54C9C9-8D76-3569-F255-CFF8C502DED7}">
 					<Name>Untitled1 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
 						<Context>
 							<Id NeedCalleeCall="true">0</Id>
+							<Name>Task_1</Name>
+							<ManualConfig>
+								<OTCID>#x02010040</OTCID>
+							</ManualConfig>
+							<Priority>1</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+						<Context>
+							<Id NeedCalleeCall="true">1</Id>
+							<Name>Task_2</Name>
+							<ManualConfig>
+								<OTCID>#x02010050</OTCID>
+							</ManualConfig>
+							<Priority>2</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+						<Context>
+							<Id NeedCalleeCall="true">2</Id>
 							<Name>PlcTask</Name>
 							<ManualConfig>
 								<OTCID>#x02010030</OTCID>
@@ -28,6 +49,8 @@
 						</Context>
 					</Contexts>
 					<TaskPouOids>
+						<TaskPouOid Prio="1" OTCID="#x08502002"/>
+						<TaskPouOid Prio="2" OTCID="#x08502003"/>
 						<TaskPouOid Prio="20" OTCID="#x08502001"/>
 					</TaskPouOids>
 				</Instance>
